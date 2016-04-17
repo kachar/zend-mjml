@@ -9,6 +9,7 @@ use Zend\Mail\Message;
 use Zend\Mail\Transport\TransportInterface;
 use Zend\View\Model\ModelInterface;
 use Zend\View\Renderer\RendererInterface;
+use ZendMjml\Exception\TemplateNotFoundException;
 
 class Mjml
 {
@@ -75,12 +76,17 @@ class Mjml
      * Convertion to MJML is the last step in the render process.
      *
      * @param  Zend\View\Model\ModelInterface $view
+     * @throws ZendMjml\Exception\TemplateNotFoundException
      * @return string
      */
     public function renderView(ModelInterface $view)
     {
         $template = $view->getTemplate();
         $templatePath = $this->renderer->resolver($template);
+        if (false === $templatePath) {
+            throw new TemplateNotFoundException("The template file '{$template}' cannot be found.");
+        }
+
         $extension = pathinfo($template, PATHINFO_EXTENSION);
         $markup = '';
         if ('pmjml' == $extension) {
