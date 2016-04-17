@@ -12,6 +12,9 @@ return [
         ],
     ],
     'service_manager' => [
+        'invokables' => [
+            'Zend\Mail\Transport\Sendmail' => 'Zend\Mail\Transport\Sendmail',
+        ],
         'factories' => [
             'Client\Mjml' => 'ZendMjml\Factory\MjmlClientFactory',
             'Service\Mjml' => 'ZendMjml\Factory\MjmlFactory',

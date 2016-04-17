@@ -4,12 +4,12 @@ namespace ZendMjml\Service;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\TransferException;
+use ZendMjml\Exception\TemplateNotFoundException;
 use Zend\Mail\Headers;
 use Zend\Mail\Message;
 use Zend\Mail\Transport\TransportInterface;
 use Zend\View\Model\ModelInterface;
 use Zend\View\Renderer\RendererInterface;
-use ZendMjml\Exception\TemplateNotFoundException;
 
 class Mjml
 {
@@ -21,14 +21,14 @@ class Mjml
 
     /**
      * @param  GuzzleHttp\ClientInterface $client
-     * @param  Zend\Mail\Transport\TransportInterface $transport
      * @param  Zend\View\Renderer\RendererInterface $client
+     * @param  Zend\Mail\Transport\TransportInterface $transport
      */
-    public function __construct(ClientInterface $client, TransportInterface $transport, RendererInterface $renderer)
+    public function __construct(ClientInterface $client, RendererInterface $renderer, TransportInterface $transport = null)
     {
         $this->client = $client;
-        $this->transport = $transport;
         $this->renderer = $renderer;
+        $this->transport = $transport;
     }
 
     /**
@@ -107,6 +107,9 @@ class Mjml
      */
     public function sendEmail(Message $email)
     {
+        if (null === $this->transport) {
+            throw new \Exception('Transport Adapter not set.');
+        }
         return $this->transport->send($email);
     }
 

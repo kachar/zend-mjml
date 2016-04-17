@@ -3,9 +3,20 @@
 This module is based on: MJML
 The only open-source framework that makes responsive-email easy https://mjml.io
 
-<a href="http://mjml.io" target="_blank">
-  <img width="250"src="https://cloud.githubusercontent.com/assets/6558790/12672296/7b66d8cc-c675-11e5-805d-c6d196320537.png">
-</a>
+<p align="center">
+  <a href="https://github.com/mjmlio/mjml" target="_blank">
+    <img width="250"src="https://cloud.githubusercontent.com/assets/6558790/12672296/7b66d8cc-c675-11e5-805d-c6d196320537.png">
+  </a>
+</p>
+
+With this module you can define your emails as MJML files and render them using Zend `ViewModel`.
+The MJML markup will be sent to https://mjml.io/try-it-live in order to be transformed to HTML.
+
+The package supports:
+- simple variable replacement after the markup has been converted. (`*.mjml` files)
+- complex templating system using PHP inside the mjml markup. (`*.pmjml` files)
+
+You can send the complete emails using a pre-defined email transport method.
 
 ## Requirements
 
@@ -39,12 +50,39 @@ The only open-source framework that makes responsive-email easy https://mjml.io
 
 Under the key `mjml` you can set the following options in the configuration:
 
-| Config key         | Description                                                                                                                                                                                                                      |
-|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `mjmlServiceUrl`   | Sets the MJML endpoint (default `https://mjml.io`)                                                                                                                                                                               |
-| `timeout`          | Float describing the timeout of the request in seconds. Use 0 to wait indefinitely (default value `10`).                                                                                                                         |
-| `connectTimeout`   | Float describing the number of seconds to wait while trying to connect to a server. Use 0 to wait indefinitely (default value `1.5`).                                                                                            |
-| `transportAdapter` | Configuration options based on `\Zend\Mail\Transport\Factory`. For advanced factory options you can see official documentation: http://framework.zend.com/manual/current/en/modules/zend.mail.transport.html#zend-mail-transport |
+`mjmlServiceUrl`:
+Sets the MJML endpoint (default `https://mjml.io`)
+
+`timeout`:
+Float describing the timeout of the request in seconds. Use 0 to wait indefinitely (default value `10`).
+
+`connectTimeout`:
+Float describing the number of seconds to wait while trying to connect to a server. Use 0 to wait indefinitely (default value `1.5`).
+
+`transportAdapter`:
+The adapter that will be used to send the actual email. Two possible configurations:
+* as a string - Any service that implements `Zend\Mail\Transport\TransportInterface` and can be fetched from ServiceLocator.
+```php
+    'mjml' => [
+        'transportAdapter' => [
+            'type' => 'sendmail',
+            'options' => [
+                // see http://www.sendmail.org/~ca/email/man/sendmail.html
+            ],
+        ],
+    ],
+```
+* as factory array - Configuration options based on `\Zend\Mail\Transport\Factory`. For advanced factory options you can see (official documentation)[http://framework.zend.com/manual/current/en/modules/zend.mail.transport.html#zend-mail-transport].
+```php
+    'mjml' => [
+        'transportAdapter' => 'Zend\Mail\Transport\Sendmail',
+    ],
+    'service_manager' => [
+        'invokables' => [
+            'Zend\Mail\Transport\Sendmail' => 'Zend\Mail\Transport\Sendmail',
+        ],
+    ],
+```
 
 ## Usage
 
