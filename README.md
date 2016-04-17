@@ -7,6 +7,13 @@ The only open-source framework that makes responsive-email easy https://mjml.io
   <img width="250"src="https://cloud.githubusercontent.com/assets/6558790/12672296/7b66d8cc-c675-11e5-805d-c6d196320537.png">
 </a>
 
+## Requirements
+
+* PHP Version >= 5.4
+* [Zend Framework 2](https://github.com/zendframework/zf2) (2.*)
+* [Guzzle Http Client](https://github.com/guzzle/guzzle) (~5)
+* [Guzzle Cache Subscriber](https://github.com/guzzle/cache-subscriber) (*)
+
 ## Installation
 
  1. Add `"kachar/zend-mjml": "dev-master"` to your `composer.json` file and run `php composer.phar update`.
