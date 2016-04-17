@@ -1,0 +1,27 @@
+{
+    "name": "kachar/zend-mjml",
+    "description": "MJML Client ",
+    "license": "MIT",
+    "type": "library",
+    "homepage": "https://github.com/kachar/zend-mjml",
+    "authors": [
+        {
+            "name": "Ilko Kacharov",
+            "email": "ikacharov@mailjet.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "zendframework/zendframework": "2.*",
+        "guzzlehttp/guzzle": "~5",
+        "guzzlehttp/cache-subscriber": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "ZendMjml": "src/"
+        },
+        "classmap": [
+            "./Module.php"
+        ]
+    }
+}

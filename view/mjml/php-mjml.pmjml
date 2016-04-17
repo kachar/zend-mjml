@@ -1,0 +1,22 @@
+<mj-body>
+  <mj-section>
+    <mj-column>
+
+      <mj-image width="100" src="https://mjml.io/assets/img/logo-small.png"></mj-image>
+
+      <mj-divider border-color="#F45E43"></mj-divider>
+
+      <mj-text font-size="20px" color="#F45E43" font-family="helvetica">Hello {{ name }}</mj-text>
+    </mj-column>
+  </mj-section>
+  <mj-section>
+    <mj-invoice format="0,00.00€" intl="name:Product Name" width="100%">
+      <?php foreach($products as $product): ?>
+        <mj-invoice-item
+            name="<?=$product['name']?>"
+            price="<?=$product['price']?>€"
+            quantity="<?=$product['quantity']?>" />
+      <?php endforeach; ?>
+    </mj-invoice>
+  </mj-section>
+</mj-body>
