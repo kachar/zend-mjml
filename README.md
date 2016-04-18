@@ -9,7 +9,7 @@ The only open-source framework that makes responsive-email easy https://mjml.io
   </a>
 </p>
 
-With this module you can define your emails as MJML files and render them using Zend `ViewModel`.
+With this module you can define your email templates as MJML files and render them using Zend `ViewModel`.
 The MJML markup will be sent to https://mjml.io/try-it-live in order to be transformed to HTML.
 
 The package supports:
