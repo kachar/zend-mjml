@@ -125,7 +125,7 @@ The adapter that will be used to send the actual email. Two possible configurati
     $service = $this->getServiceLocator()->get('Service\Mjml');
 
     $view = new ViewModel();
-    $view->name = 'ilko kacharov';
+    $view->name = 'John Doe';
     $view->setTemplate('mjml/plain.mjml');
     // This is the final html to be sent to the recipients
     $body = $service->renderView($view);
