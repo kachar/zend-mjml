@@ -21,11 +21,13 @@ class MjmlFactory implements FactoryInterface
         $renderer = $serviceLocator->get('Zend\View\Renderer\RendererInterface');
 
         $adapterConfig = $config['transportAdapter'];
+        $transport = null;
         if (is_string($adapterConfig)) {
             $transport = $serviceLocator->get($adapterConfig);
         } elseif (is_array($adapterConfig)) {
             $transport = \Zend\Mail\Transport\Factory::create($adapterConfig);
-        } else {
+        }
+        if (null === $transport) {
             throw new \Exception('Transport Adapter cannot be found.');
         }
 
